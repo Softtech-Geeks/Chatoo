@@ -4,8 +4,7 @@ import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 /* Importing components */
-import ChannelContainer from './components/ChannelContainer';
-import ChannelListContainer from './components/ChannelListContainer';
+import { ChannelContainer, ChannelListContainer } from './components'
 
 /* API key implementation from StreamAPI */
 const apiKey = '793eydgeka9b';
@@ -18,8 +17,8 @@ const App = () => {
     <div className='app__wrapper'>
         <h1>Chatoo</h1>
         <Chat client={client} theme="team light"> {/* Channel container & Channel container list*/}
-            <ChannelContiner/>
-            <ChannelListContiner/>
+            <ChannelContainer />
+            <ChannelListContainer />
         </Chat>
     </div>
   );
