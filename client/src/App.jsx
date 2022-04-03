@@ -1,4 +1,8 @@
 import React from 'react'
+
+/* Styles */
+import './App.css';
+
 /* Important imports  */
 import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
@@ -12,14 +16,15 @@ const apiKey = '793eydgeka9b';
 /* instance */
 const client = StreamChat.getInstance(apiKey);
 
+
 const App = () => {
   return (
     <div className='app__wrapper'>
-        <h1>Chatoo</h1>
-        <Chat client={client} theme="team light"> {/* Channel container & Channel container list*/}
-            <ChannelContainer />
-            <ChannelListContainer />
-        </Chat>
+      
+      <Chat client={client} theme="team light"> {/* Channel container & Channel container list*/}
+        <ChannelContainer />
+        <ChannelListContainer />
+      </Chat>
     </div>
   );
 }
