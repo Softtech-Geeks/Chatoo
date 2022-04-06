@@ -1,8 +1,79 @@
-import React from 'react'
+import React from 'react';
+/* importing componenets & Cookies */
+import { ChannelList, useChatContext } from 'stream-chat-react';
+import Cookies from 'universal-cookie';
+import { TeamChannelList, TeamChannelPreview, ChannelSearch } from './';
+/* importing assets */
+import ChatooIcon from '../assets/ChatooIcon.png'
+import LogoutIcon from '../assets/logout.png'
 
+/* The sidebar or navigation-bar components*/
+const SideBar = () => (
+  <div className="channel-list__sidebar">
+    <div className="channel-list__sidebar__icon1">
+      <div className="icon1__inner">
+        <img src={ChatooIcon} alt="Chatoo" width="30"/>
+      </div>
+    </div>
+    <div className="channel-list__sidebar__icon2">
+      <div className="icon1__inner">
+        <img src={LogoutIcon} alt="Logout" width="30"/>
+      </div>
+    </div>
+  </div>
+);
+
+const CompanyHeader = () => (
+  <div className="channel-list__header">
+    <p className="channel-list__header__text">Chatoo</p>
+  </div>
+)
 const ChannelListContainer = () => {
   return (
-    <div>ChannelListContainer</div>
+    <>
+      <SideBar />
+      <div className="channel-list__list__wrapper">
+        <CompanyHeader />
+        <ChannelSearch />
+
+        {/* Channel list for Group messages */}
+        <ChannelList 
+          filters={{}}
+          channelRenderFilterFn={() => {}}
+          List={(listProps) => (
+            <TeamChannelList 
+              {...listProps}
+              type = "team"
+            />
+          )}
+
+          Preview={(previewProps) => (
+            <TeamChannelPreview 
+              {...previewProps}
+              type = "team"
+            />
+          )}
+        />
+          {/* Channel list for Direct messages */}
+          <ChannelList 
+          filters={{}}
+          channelRenderFilterFn={() => {}}
+          List={(listProps) => (
+            <TeamChannelList 
+              {...listProps}
+              type = "messaging"
+            />
+          )}
+
+          Preview={(previewProps) => (
+            <TeamChannelPreview 
+              {...previewProps}
+              type = "messaging"
+            />
+          )}
+        />
+      </div>
+    </>
   );
 }
 
