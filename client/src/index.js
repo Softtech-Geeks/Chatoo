@@ -1,6 +1,10 @@
+import * as ReactDOMClient from 'react-dom/client';
 import React from 'react';
-import ReactDOM from 'react-dom';
 /* Comment for importing the app */
 import App from './App';
-/* rendering the app using the root, simply connecting the index*/
-ReactDOM.render(<App />, document.getElementById('root'));
+
+const container = document.getElementById('root');
+
+// Create a root.
+const root = ReactDOMClient.createRoot(container);
+root.render(<App />);
