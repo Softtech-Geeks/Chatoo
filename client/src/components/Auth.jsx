@@ -6,6 +6,8 @@ import axios from "axios";
 // image from assets folder
 import signinImage from "../assets/signup.jpg";
 
+const cookies = new Cookies();
+
 // react-icons used to provide different kinds of icons for react projects
 import { FaUserCheck, FaUserPlus, FaPhone } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -31,10 +33,30 @@ const Auth = () => {
 	// form used to show the changes occured on registration object attributes
 	const [form, setForm] = useState(initialState);
 
-	// onSubmit function
+	// onSubmit function, getting url by login or signup, store all the data in cookies
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(form);
+
+		const {fullName, userName, password, phone, avatarURL} = form1;
+
+		const URL = 'http://localhost:5000/auth';
+
+		const { data: { token, userId, hashedPassword} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+			userName, password, fullName, phone, avatarURL,
+		});
+
+		cookies.set('token', token);
+		cookies.set('username', userName);
+		cookies.set('fullName', fullName);
+		cookies.set('userId', userId);
+
+		if(isSignup){
+			cookies.set('phoneNumber', phone);
+			cookies.set('avatarURL', avatarURL);
+			cookies.set('hashedPassword', hashedPassword);
+		}
+		
 	};
 
 	// use effect to display the avatar from the url when link changed

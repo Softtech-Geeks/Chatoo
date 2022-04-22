@@ -1,8 +1,10 @@
 // import libraries and functions from StreamAPI and bcrypt to encrypt password
 const { consect } = require('getstream')
 const bcrypt = require('bcrypt')
-const StreamChat = require('stream-chat')
+const StreamChat = require('stream-chat').StreamChat;
 const crypto = require('crypto')
+
+require('dotenv').config()
 
 // import enviroment variables from .env file
 const api_key = process.env.STREAM_API_KEY
