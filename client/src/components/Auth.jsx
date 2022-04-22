@@ -1,7 +1,9 @@
-// useState imported to change actions based on certin changes
-import React, { useState } from "react";
+// useState imported to change actions based on certin changes, useEffect used to addeventlisteners to html components
+import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
+
+// image from assets folder
 import signinImage from "../assets/signup.jpg";
 
 // react-icons used to provide different kinds of icons for react projects
@@ -9,7 +11,7 @@ import { FaUserCheck, FaUserPlus, FaPhone } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BsFillFileImageFill } from "react-icons/bs";
 
-// registration object
+// registration / login object
 const initialState = {
 	fullName: "",
 	userName: "",
@@ -29,15 +31,15 @@ const Auth = () => {
 	// form used to show the changes occured on registration object attributes
 	const [form, setForm] = useState(initialState);
 
+	// onSubmit function
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(form);
 	};
 
-	// used to apply changes on the interface based on the input
-	const handleChange = (e) => {
-		if (e.target.name == "avatarURL") {
-			setForm({ ...form, [e.target.name]: e.target.value });
+	// use effect to display the avatar from the url when link changed
+	useEffect(() => {
+		if (form.avatarURL != "") {
 			const img = document.createElement("img");
 			img.src = form.avatarURL;
 			img.width = 75;
@@ -46,20 +48,29 @@ const Auth = () => {
 			img.id = "instavatar";
 			img.style = "margin-top:10px";
 			const old = document.getElementById("instavatar");
-			return document.querySelector(".avatar").replaceChild(img, old);
-		} else if (e.target.name != "img") {
-			setForm({ ...form, [e.target.name]: e.target.value });
+			document.querySelector(".avatar").replaceChild(img, old);
 		} else {
-			setForm({ ...form, [e.target.name]: e.target.files[0] });
 			const img = document.createElement("img");
-			img.src = URL.createObjectURL(form.img);
-			img.width = 75;
-			img.height = 75;
-			img.alt = "image";
-			img.id = "instfile";
-			img.style = "margin-top:10px";
-			const old = document.getElementById("instfile");
-			return document.querySelector(".img").replaceChild(img, old);
+			img.src = form.avatarURL;
+			img.id = "instavatar";
+			const old = document.getElementById("instavatar");
+			document.querySelector(".avatar").replaceChild(img, old);
+		}
+	}, [form.avatarURL]);
+
+	// used to apply changes on the interface based on the input
+	const handleChange = (e) => {
+		if (e.target.name == "img") {
+			setForm({
+				...form,
+				[e.target.name]: e.target.files[0],
+				avatarURL:
+					e.target.files[0] != null
+						? URL.createObjectURL(e.target.files[0])
+						: "",
+			});
+		} else {
+			setForm({ ...form, [e.target.name]: e.target.value });
 		}
 		console.log(form);
 	};
@@ -141,7 +152,7 @@ const Auth = () => {
 									<label htmlFor="uploadImg">Upload Picture</label>
 								</div>
 								{isFile && (
-									<div className="img auth__form-container_fields-content_input">
+									<div className="avatar img auth__form-container_fields-content_input">
 										<label htmlFor="img">
 											Upload your image (png, jpg, jpeg)
 										</label>
@@ -159,7 +170,7 @@ const Auth = () => {
 												marginTop: "-25px",
 											}}
 										/>
-										<img src="" alt="" className="instfile" id="instfile" />
+										<img src="" alt="" id="instavatar" />
 									</div>
 								)}
 								{!isFile && (
