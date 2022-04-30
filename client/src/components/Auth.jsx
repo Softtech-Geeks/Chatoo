@@ -1,3 +1,8 @@
+// react-icons used to provide different kinds of icons for react projects
+import { FaUserCheck, FaUserPlus, FaPhone } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { BsFillFileImageFill } from "react-icons/bs";
+
 // useState imported to change actions based on certin changes, useEffect used to addeventlisteners to html components
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
@@ -7,11 +12,6 @@ import axios from "axios";
 import signinImage from "../assets/signup.jpg";
 
 const cookies = new Cookies();
-
-// react-icons used to provide different kinds of icons for react projects
-import { FaUserCheck, FaUserPlus, FaPhone } from "react-icons/fa";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { BsFillFileImageFill } from "react-icons/bs";
 
 // registration / login object
 const initialState = {
@@ -34,17 +34,17 @@ const Auth = () => {
 	const [form, setForm] = useState(initialState);
 
 	// onSubmit function, getting url by login or signup, store all the data in cookies
-	const handleSubmit = (e) => {
+	const handleSubmit = async(e) => {
 		e.preventDefault();
 		console.log(form);
 
-		const {fullName, userName, password, phone, avatarURL} = form1;
+		const {userName, password, phone, avatarURL} = form;
 
 		const URL = 'http://localhost:5000/auth';
 
-		const { data: { token, userId, hashedPassword} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-			userName, password, fullName, phone, avatarURL,
-		});
+		const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+            userName, password, fullName: form.fullName, phone, avatarURL,
+        });
 
 		cookies.set('token', token);
 		cookies.set('username', userName);

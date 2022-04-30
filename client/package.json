@@ -9,7 +9,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.29.0",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^5.0.0",
     "stream-chat": "^6.3.0",
     "stream-chat-react": "^8.0.0",
     "universal-cookie": "^4.0.4",
