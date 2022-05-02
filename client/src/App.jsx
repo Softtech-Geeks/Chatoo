@@ -1,9 +1,12 @@
-import React, {useState} from "react";
-import { StreamChat } from 'stream-chat';
-import { Chat } from 'stream-chat-react';
-import Cookies from 'universal-cookie';
+/* Important imports  */
+import { StreamChat } from "stream-chat";
+import { Chat } from "stream-chat-react";
+import Cookies from "universal-cookie";
 
-import { ChannelListContainer, ChannelContainer, Auth } from './components';
+/* Importing components */
+import { ChannelContainer, ChannelListContainer, Auth } from "./components";
+
+import React, {useState} from "react";
 
 import 'stream-chat-react/dist/css/index.css';
 import './App.css';
@@ -12,13 +15,6 @@ import './App.css';
 import "./App.css";
 
 const cookies = new Cookies();
-
-/* Important imports  */
-import { StreamChat } from "stream-chat";
-import { Chat } from "stream-chat-react";
-import Cookies from "universal-cookie";
-/* Importing components */
-import { ChannelContainer, ChannelListContainer, Auth } from "./components";
 
 /* API key implementation from StreamAPI */
 const apiKey = "793eydgeka9b";
