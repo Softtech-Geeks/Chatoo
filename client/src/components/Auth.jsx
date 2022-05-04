@@ -1,7 +1,3 @@
-// react-icons used to provide different kinds of icons for react projects
-import { FaUserCheck, FaUserPlus, FaPhone } from "react-icons/fa";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { BsFillFileImageFill } from "react-icons/bs";
 
 // useState imported to change actions based on certin changes, useEffect used to addeventlisteners to html components
 import React, { useState, useEffect } from "react";
@@ -120,13 +116,7 @@ const Auth = () => {
 									style={{ display: "inline" }}
 									required
 								/>
-								<FaUserPlus
-									style={{
-										color: "#005fff",
-										marginLeft: "80%",
-										marginTop: "-25px",
-									}}
-								/>
+								
 							</div>
 						)}
 						<div className="auth__form-container_fields-content_input">
@@ -138,13 +128,7 @@ const Auth = () => {
 								onChange={handleChange}
 								required
 							/>
-							<FaUserCheck
-								style={{
-									color: "#005fff",
-									marginLeft: "80%",
-									marginTop: "-25px",
-								}}
-							/>
+							
 						</div>
 						{isSignup && (
 							<>
@@ -157,13 +141,7 @@ const Auth = () => {
 										onChange={handleChange}
 										required
 									/>
-									<FaPhone
-										style={{
-											color: "#005fff",
-											marginLeft: "80%",
-											marginTop: "-25px",
-										}}
-									/>
+									
 								</div>
 								<div className="norm">
 									<input
@@ -185,13 +163,7 @@ const Auth = () => {
 											accept="image/*"
 											required
 										/>
-										<BsFillFileImageFill
-											style={{
-												color: "#005fff",
-												marginLeft: "80%",
-												marginTop: "-25px",
-											}}
-										/>
+										
 										<img src="" alt="" id="instavatar" />
 									</div>
 								)}
@@ -205,13 +177,7 @@ const Auth = () => {
 											onChange={handleChange}
 											required
 										/>
-										<BsFillFileImageFill
-											style={{
-												color: "#005fff",
-												marginLeft: "80%",
-												marginTop: "-25px",
-											}}
-										/>
+										
 										<img src="" alt="" id="instavatar" />
 									</div>
 								)}
@@ -226,13 +192,7 @@ const Auth = () => {
 								onChange={handleChange}
 								required
 							/>
-							<RiLockPasswordFill
-								style={{
-									color: "#005fff",
-									marginLeft: "80%",
-									marginTop: "-25px",
-								}}
-							/>
+							
 						</div>
 						{isSignup && (
 							<div className="auth__form-container_fields-content_input">
@@ -244,13 +204,7 @@ const Auth = () => {
 									onChange={handleChange}
 									required
 								/>
-								<RiLockPasswordFill
-									style={{
-										color: "#005fff",
-										marginLeft: "80%",
-										marginTop: "-25px",
-									}}
-								/>
+								
 							</div>
 						)}
 						<div className="auth__form-container_fields-content_button">

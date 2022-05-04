@@ -17,7 +17,7 @@ import "./App.css";
 const cookies = new Cookies();
 
 /* API key implementation from StreamAPI */
-const apiKey = "793eydgeka9b";
+const apiKey = "jwcz5fsyyybp";
 const authToken = cookies.get("token");
 
 /* instance */
