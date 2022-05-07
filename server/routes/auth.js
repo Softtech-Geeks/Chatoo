@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { connect } = require('getstream');
 
 // import functions from controllers folder / auth file
 const { signup, login } = require('../controllers/auth.js')

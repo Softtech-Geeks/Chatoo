@@ -1,4 +1,5 @@
 // import libraries
+const { connect } = require('getstream');
 const express = require('express');
 const cors = require('cors');
 
@@ -6,6 +7,8 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth.js');
 
 const app = express();
+
+
 
 // set port variable from env file or 5000
 const PORT = process.env.PORT || 5000;
