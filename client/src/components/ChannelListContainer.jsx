@@ -31,14 +31,14 @@ const CompanyHeader = () => (
   </div>
 )
 const ChannelListContainer = () => {
-  const logout = () =>{
-    cookies.remove('token');
+  const logout = () => {
+    cookies.remove("token");
+    cookies.remove('userId');
     cookies.remove('username');
-		cookies.remove('fullName');
-		cookies.remove('userId');
-		cookies.remove('phoneNumber');
-		cookies.remove('avatarURL');
-		cookies.remove('hashedPassword');
+    cookies.remove('fullName');
+    cookies.remove('avatarURL');
+    cookies.remove('hashedPassword');
+    cookies.remove('phoneNumber');
 
     window.location.reload();
 }

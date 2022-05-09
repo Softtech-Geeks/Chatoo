@@ -1,31 +1,59 @@
-// import libraries
-const { connect } = require('getstream');
+var bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 
-// import functions from auth file in routes folder
-const authRoutes = require('./routes/auth.js');
+const authRoutes = require("./routes/auth.js");
 
 const app = express();
-
-
-
-// set port variable from env file or 5000
 const PORT = process.env.PORT || 5000;
 
 require('dotenv').config();
 
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
+// const twilioClient = require('twilio')(accountSid, authToken);
+
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// export post function
+// module.exports = routerg()
 
 // server responses on client requests
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
+    res.send('Hello, World!')
 })
 
-// use auth functions in routes folder for /auth path
-app.use('/auth', authRoutes);
+// app.post('/', (req, res) => {
+//     const { message, user: sender, type, members } = req.body;
 
-// open a path for server to receive requests
-app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
+//     if (type === 'message.new') {
+//         members
+//             .filter((member) => member.user_id !== sender.id)
+//             .forEach(({ user }) => {
+//                 if (!user.online) {
+//                     twilioClient.messages.create({
+//                             body: `You have a new message from ${message.user.fullName} - ${message.text}`,
+//                             messagingServiceSid: messagingServiceSid,
+//                             to: user.phoneNumber
+//                         })
+//                         .then(() => console.log('Message sent!'))
+//                         .catch((err) => console.log(err));
+//                 }
+//             })
+
+
+//         return res.status(200).send('Message sent!');
+//     }
+
+//     return res.status(200).send('Not a new message request');
+// });
+
+app.use('/auth', authRoutes);
+app.get('/auth', (req, res) => {
+    res.send('Hello, World! in auth')
+})
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

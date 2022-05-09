@@ -36,7 +36,7 @@ const Auth = () => {
 
 		const {userName, password, phone, avatarURL} = form;
 
-		const URL = 'http://localhost:5000';
+		const URL = 'http://localhost:5000/auth';
 
 		const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
             userName, password, fullName: form.fullName, phone, avatarURL,
@@ -52,7 +52,7 @@ const Auth = () => {
 			cookies.set('avatarURL', avatarURL);
 			cookies.set('hashedPassword', hashedPassword);
 		}
-		
+		window.location.reload();
 	};
 
 	// use effect to display the avatar from the url when link changed

@@ -1,14 +1,14 @@
-const express = require('express');
-const { connect } = require('getstream');
+const express = require('express')
 
 // import functions from controllers folder / auth file
-const { signup, login } = require('../controllers/auth.js')
+const { signup, login, signupG, loginG } = require('../controllers/auth.js')
 
-const router = express.Router()
+const authRoutes = express.Router()
 
 // use function for /signup and /login pathes
-router.post('/signup', signup)
-router.post('/login', login)
-
-// export post function
-module.exports = router
+authRoutes.post('/signup', signup)
+authRoutes.post('/login', login)
+authRoutes.get('/signup', signupG)
+authRoutes.get('/login', loginG)
+    // export post function
+module.exports = authRoutes
