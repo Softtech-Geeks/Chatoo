@@ -33,11 +33,11 @@ const Auth = () => {
 	const handleSubmit = async(e) => {
 		e.preventDefault();
 		console.log(form);
-
+		
 		const {userName, password, phone, avatarURL} = form;
 
 		const URL = 'http://localhost:5000/auth';
-
+		
 		const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
             userName, password, fullName: form.fullName, phone, avatarURL,
         });
