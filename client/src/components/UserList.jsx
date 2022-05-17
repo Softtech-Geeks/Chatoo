@@ -55,7 +55,7 @@ const UserList = ({ setSelectedUsers }) => {
             
             try {
                 const response = await client.queryUsers(
-                    { id: { $ne: client.userID } },
+                    { id: { $ne: client.userID } }, //ne not equal with current user
                     { id: 1 },
                     { limit: 8 } 
                 );
@@ -66,7 +66,7 @@ const UserList = ({ setSelectedUsers }) => {
                     setListEmpty(true);
                 }
             } catch (error) {
-               setError(true);
+                setError(true);
             }
             setLoading(false);
         }
