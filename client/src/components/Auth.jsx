@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 
 // image from assets folder
-import signinImage from "../assets/signup.jpg";
+import signinImage from "../assets/theme.png";
 
 const cookies = new Cookies();
 
@@ -30,24 +30,24 @@ const Auth = () => {
 	const [form, setForm] = useState(initialState);
 
 	// onSubmit function, getting url by login or signup, store all the data in cookies
-	const handleSubmit = async(e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.log(form);
-		
-		const {userName, password, phone, avatarURL} = form;
+
+		const { userName, password, phone, avatarURL } = form;
 
 		const URL = 'https://chatoo-sg.herokuapp.com/auth';
-		
+
 		const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-            userName, password, fullName: form.fullName, phone, avatarURL,
-        });
+			userName, password, fullName: form.fullName, phone, avatarURL,
+		});
 
 		cookies.set('token', token);
 		cookies.set('username', userName);
 		cookies.set('fullName', fullName);
 		cookies.set('userId', userId);
 
-		if(isSignup){
+		if (isSignup) {
 			cookies.set('phoneNumber', phone);
 			cookies.set('avatarURL', avatarURL);
 			cookies.set('hashedPassword', hashedPassword);
@@ -116,7 +116,7 @@ const Auth = () => {
 									style={{ display: "inline" }}
 									required
 								/>
-								
+
 							</div>
 						)}
 						<div className="auth__form-container_fields-content_input">
@@ -128,7 +128,7 @@ const Auth = () => {
 								onChange={handleChange}
 								required
 							/>
-							
+
 						</div>
 						{isSignup && (
 							<>
@@ -141,7 +141,7 @@ const Auth = () => {
 										onChange={handleChange}
 										required
 									/>
-									
+
 								</div>
 								<div className="norm">
 									<input
@@ -163,7 +163,7 @@ const Auth = () => {
 											accept="image/*"
 											required
 										/>
-										
+
 										<img src="" alt="" id="instavatar" />
 									</div>
 								)}
@@ -177,7 +177,7 @@ const Auth = () => {
 											onChange={handleChange}
 											required
 										/>
-										
+
 										<img src="" alt="" id="instavatar" />
 									</div>
 								)}
@@ -192,7 +192,7 @@ const Auth = () => {
 								onChange={handleChange}
 								required
 							/>
-							
+
 						</div>
 						{isSignup && (
 							<div className="auth__form-container_fields-content_input">
@@ -204,7 +204,7 @@ const Auth = () => {
 									onChange={handleChange}
 									required
 								/>
-								
+
 							</div>
 						)}
 						<div className="auth__form-container_fields-content_button">
