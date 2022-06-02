@@ -25,13 +25,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  
-    padding: 2rem;
-    background: #005fff;
+    
+    padding: 1rem;
+    background: #4f8fff;
   }
   
   .auth__form-container_image {
-    flex: 3;
+    flex: 4;
     display: flex;
     box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.05);
   }
@@ -56,7 +56,7 @@
   .auth__form-container_fields-content p {
     font-size: 1.5rem;
     font-family: Arial, Helvetica, sans-serif;
-    color: #05245a;
+    color: #003796;
     font-weight: 900;
   }
   
@@ -70,7 +70,7 @@
   
   .auth__form-container_fields-content_input label {
     margin-bottom: 0.45rem;
-    color: rgb(61, 79, 88);
+    color: rgb(66, 80, 87);
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 0.7px;
@@ -98,7 +98,7 @@
   }
   
   .auth__form-container_fields-content_input input::placeholder {
-    color: #b1b1b1;
+    color: #6c6c6c;
     width: 100%;
     font-weight: unset;
     font-family: Arial, Helvetica, sans-serif;
@@ -141,7 +141,7 @@
   }
   
   .auth__form-container_fields-content_button button:hover {
-    background: #0066ff;
+    background: #589bff;
   }
   
   .auth__form-container_fields-account {
