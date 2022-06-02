@@ -148,49 +148,56 @@ const Auth = () => {
 										<label htmlFor="img">
 											Upload your image (png, jpg, jpeg)
 										</label>
-										{image ? (
-											<img
-												src={image && image.filesUploaded[0].url}
-												alt="imageUploded"
-												style={{ width: 75, height: 75 }}
+										{
+											image ? (
+												<img
+													src={image && image.filesUploaded[0].url}
+													alt="imageUploded"
+													style={{ width: 75, height: 75 }}
+												/>
+											) : (
+												<div className="auth__form-container_fields-content_button">
+													<button onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}>Choose Image</button>
+												</div>)
+										}
+										{
+											isPicker && <PickerOverlay
+												apikey={fileApi}
+												onSuccess={(res) => {
+													console.log(res)
+													setImage(res);
+													setForm({ ...form, avatarURL: res.filesUploaded[0].url });
+													setIsPicker(false);
+												}}
+												onError={(res) => alert(res)}
+												pickerOptions={{
+													maxFiles: 1,
+													accept: ["image/*"],
+													errorsTimeout: 2000,
+													maxSize: 1 * 1000 * 1000,
+												}}
 											/>
-										) : (
-											<div className="auth__form-container_fields-content_button">
-												<button onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}>Choose Image</button>
-											</div>)}
-										{isPicker && <PickerOverlay
-											apikey={fileApi}
-											onSuccess={(res) => {
-												console.log(res)
-												setImage(res);
-												setForm({ ...form, avatarURL: res.filesUploaded[0].url });
-												setIsPicker(false);
-											}}
-											onError={(res) => alert(res)}
-											pickerOptions={{
-												maxFiles: 1,
-												accept: ["image/*"],
-												errorsTimeout: 2000,
-												maxSize: 1 * 1000 * 1000,
-											}}
-										/>}
-										<img src="" alt="" id="instavatar" />
-									</div>
-								)}
-								{!isFile && (
-									<div className="avatar auth__form-container_fields-content_input">
-										<label htmlFor="avatarURL">Avatar URL</label>
-										<input
-											type="text"
-											name="avatarURL"
-											placeholder="Avatar URL"
-											onChange={handleChange}
-											required
-										/>
+										}
 
 										<img src="" alt="" id="instavatar" />
 									</div>
 								)}
+								{
+									!isFile && (
+										<div className="avatar auth__form-container_fields-content_input">
+											<label htmlFor="avatarURL">Avatar URL</label>
+											<input
+												type="text"
+												name="avatarURL"
+												placeholder="Avatar URL"
+												onChange={handleChange}
+												required
+											/>
+
+											<img src="" alt="" id="instavatar" />
+										</div>
+									)
+								}
 							</>
 						)}
 						<div className="auth__form-container_fields-content_input">
@@ -204,35 +211,37 @@ const Auth = () => {
 							/>
 
 						</div>
-						{isSignup && (
-							<div className="auth__form-container_fields-content_input">
-								<label htmlFor="confirmPassword">Confirm Password</label>
-								<input
-									type="password"
-									name="confirm"
-									placeholder="Confirm Password"
-									onChange={handleChange}
-									required
-								/>
+						{
+							isSignup && (
+								<div className="auth__form-container_fields-content_input">
+									<label htmlFor="confirmPassword">Confirm Password</label>
+									<input
+										type="password"
+										name="confirm"
+										placeholder="Confirm Password"
+										onChange={handleChange}
+										required
+									/>
 
-							</div>
-						)}
+								</div>
+							)
+						}
 						<div className="auth__form-container_fields-content_button">
 							<button>{isSignup ? "Sign Up" : "Sign In"}</button>
 						</div>
-					</form>
+					</form >
 					<div className="auth__form-container_fields-account">
 						<p>
 							{isSignup ? "Already have account?" : "Don't have an account?"}
 						</p>
 						<span onClick={switchMode}>{isSignup ? "Sign In" : "Sign Up"}</span>
 					</div>
-				</div>
-			</div>
+				</div >
+			</div >
 			<div className="auth__form-container_image">
 				<img src={signinImage} alt="sign in" />
 			</div>
-		</div>
+		</div >
 	);
 };
 
