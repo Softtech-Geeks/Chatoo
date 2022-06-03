@@ -34,6 +34,7 @@ const ChannelSearch = ({ setToggleContainer }) => {
             })
             const [channels, { users }] = await Promise.all([channelResponse, userResponse]);
 
+            console.log(channels);
             if (channels.length) setTeamChannels(channels);
             if (users.length) setDirectChannels(users);
 
