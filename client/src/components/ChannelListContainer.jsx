@@ -73,7 +73,7 @@ const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEdi
     <>
       <SideBar logout={logout} client={client} setIsProfile={setIsProfile} setIsDashboard={setIsDashboard} />
       {!isProfile && !isDashboard &&
-        <div className="channel-list__list__wrapper">
+        <div className="channel-list__list__wrapper" style={{ overflow: "auto" }}>
           <CompanyHeader />
           <ChannelSearch setToggleContainer={setToggleContainer} />
 
