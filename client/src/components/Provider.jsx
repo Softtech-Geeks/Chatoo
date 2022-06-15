@@ -14,6 +14,7 @@ const Provider = ({ setIsProvider }) => {
             members: { $in: [client.userID] }
         });
 
+        // channels = channels.filter(channel => if (channel.ServiceProvider == null) return channel);
         console.log(channels);
         if (channels.length) setTeamChannels(channels);
     }
@@ -130,17 +131,19 @@ const Provider = ({ setIsProvider }) => {
                             </div>
                             <div className="auth__form-container_fields-content_input">
                                 <p>Service Description</p>
-                                <textarea
+                                <input
+                                    type="text"
                                     name="serviceDesc"
                                     placeholder="Service Description"
                                     onChange={handleChange}
-                                    required></textarea>
+                                    required
+                                />
                             </div>
                             {teamChannels &&
                                 <div className="auth__form-container_fields-content_input">
                                     <p>Group Channel</p>
-                                    <select name="channel" id="channel" onChange={handleChange}>
-                                        {teamChannels.map((channel, k) => <option key={k}>{channel.id}</option>)}
+                                    <select name="channel" id="channel" style={{ width: 300 }} onChange={handleChange}>
+                                        {teamChannels.filter(channel => channel.ServiceProvider == null).map((channel, k) => <option key={k}>{channel.id}</option>)}
                                     </select>
                                 </div>
                             }
