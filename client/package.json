@@ -13,6 +13,8 @@
     "react-scripts": "^5.0.1",
     "stream-chat": "^6.3.0",
     "stream-chat-react": "^8.0.0",
+    "sweetalert2": "^11.4.17",
+    "sweetalert2-react-content": "^5.0.0",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },

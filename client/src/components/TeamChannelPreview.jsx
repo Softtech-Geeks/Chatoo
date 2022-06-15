@@ -15,7 +15,7 @@ const TeamChannelPreview = ({ setActiveChannel, setIsCreating, setIsEditing, set
             ({ user }) => user.id !== client.userID);
 
         console.log(members[0]);
-        console.log(members);
+        console.log(channel);
 
         return (
             <div className="channel-preview__item single">

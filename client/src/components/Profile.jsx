@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useChatContext, Avatar } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 import axios from "axios";
+import EditProfile from './EditProfile';
+import Provider from './Provider';
 
 const cookies = new Cookies();
 
 const Profile = () => {
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [isProvider, setIsProvider] = useState(false);
     const { client } = useChatContext();
+    // const { channel } = useChatContext();
     if (client.user.role == "admin") setIsAdmin(true);
-    // console.log(client.activeChannels);
-    // console.log(client.updateUser({ id: client.user.id, { set: { role: "admin" } } }));
-    // console.log(client.listPermissions());
-    // console.log(client.listRoles());
+    if (isEdit) return <EditProfile setIsEdit={setIsEdit} />
+    if (isProvider) return <Provider setIsProvider={setIsProvider} />
 
     const handleAdmin = async (e) => {
         e.preventDefault();
@@ -39,7 +42,6 @@ const Profile = () => {
         }
     }
 
-    const { channel } = useChatContext();
     const registerToAll = async (e) => {
         e.preventDefault();
         var auth;
@@ -125,16 +127,24 @@ const Profile = () => {
                         <Avatar image={client.user.image} name={client.user.fullName} size={125} />
                         <p className='capitalize-me'>Full Name : {client.user.fullName}</p>
                         <p className='capitalize-me'>Role : {client.user.role}</p>
-                        <p>Registered in : {client.user.created_at.slice(0, 10)}</p>
-                        <p>User status : {(client.user.banned) ? 'Banned' : "Active"}{(client.user.online) ? ' Online' : " Offline"}</p>
-                        <p>Last time active: {client.user.last_active.slice(0, 10)}</p>
+                        <p className='capitalize-me'>Phone Number : {client.user.phoneNumber}</p>
+                        <p>Registered In : {client.user.created_at.slice(0, 10)}</p>
+                        <p>Last Time Updated: {client.user.updated_at.slice(0, 10)}</p>
+                        <p>User Status : {(client.user.banned) ? 'Banned' : "Active"}{(client.user.online) ? ' Online' : " Offline"}</p>
+                        <p>Last Time Active: {client.user.last_active.slice(0, 10)}</p>
                         {/* <form onSubmit={registerToAll}> */}
-                        <form>
+                        <form onSubmit={() => setIsEdit(true)}>
                             <div className="auth__form-container_fields-content_button">
                                 {/* <button>{isAdmin ? "To Admin" : "To User"}</button> */}
                                 {/* <button>Register to All</button> */}
+                                <button>Edit Profile</button>
                             </div>
                         </form>
+                        {(client.user.role != 'ServiceProvider') && <form onSubmit={() => setIsProvider(true)}>
+                            <div className="auth__form-container_fields-content_button">
+                                <button>Become a Provider</button>
+                            </div>
+                        </form>}
                     </div></div></div>
         </>
     );
