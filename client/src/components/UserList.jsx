@@ -5,7 +5,7 @@ import { InviteIcon } from '../assets';
 
 const ListContainer = ({ children }) => {
     return (
-        <div className="user-list__container">
+        <div className="user-list__container" style={{ overflow: "auto" }}>
             <div className="user-list__header">
                 <p>User</p>
                 <p>Invite</p>
@@ -19,7 +19,7 @@ const UserItem = ({ user, setSelectedUsers }) => {
     const [selected, setSelected] = useState(false)
 
     const handleSelect = () => {
-        if(selected) {
+        if (selected) {
             setSelectedUsers((prevUsers) => prevUsers.filter((prevUser) => prevUser !== user.id))
         } else {
             setSelectedUsers((prevUsers) => [...prevUsers, user.id])
@@ -49,18 +49,17 @@ const UserList = ({ setSelectedUsers }) => {
 
     useEffect(() => {
         const getUsers = async () => {
-            if(loading) return;
+            if (loading) return;
 
             setLoading(true);
-            
+
             try {
                 const response = await client.queryUsers(
                     { id: { $ne: client.userID } }, //ne not equal with current user
-                    { id: 1 },
-                    { limit: 8 } 
+                    { id: 1 }
                 );
 
-                if(response.users.length) {
+                if (response.users.length) {
                     setUsers(response.users);
                 } else {
                     setListEmpty(true);
@@ -71,10 +70,10 @@ const UserList = ({ setSelectedUsers }) => {
             setLoading(false);
         }
 
-        if(client) getUsers()
+        if (client) getUsers()
     }, []);
 
-    if(error) {
+    if (error) {
         return (
             <ListContainer>
                 <div className="user-list__message">
@@ -84,7 +83,7 @@ const UserList = ({ setSelectedUsers }) => {
         )
     }
 
-    if(listEmpty) {
+    if (listEmpty) {
         return (
             <ListContainer>
                 <div className="user-list__message">
@@ -100,7 +99,7 @@ const UserList = ({ setSelectedUsers }) => {
                 Loading users...
             </div> : (
                 users?.map((user, i) => (
-                  <UserItem index={i} key={user.id} user={user} setSelectedUsers={setSelectedUsers} />  
+                    <UserItem index={i} key={user.id} user={user} setSelectedUsers={setSelectedUsers} />
                 ))
             )}
         </ListContainer>

@@ -13,7 +13,7 @@ const channelByUser = async ({ client, setActiveChannel, channel, setChannel }) 
   if (existingChannel) return setActiveChannel(existingChannel);
 
   const newChannel = client.channel('messaging', { members: [channel.id, client.userID] });
-  
+
   setChannel(newChannel)
 
   return setActiveChannel(newChannel);
@@ -27,11 +27,11 @@ const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer
       <div
         onClick={() => {
           setChannel(channel)
-          if(setToggleContainer) {
-            setToggleContainer((prevState) => !prevState)   
+          if (setToggleContainer) {
+            setToggleContainer((prevState) => !prevState)
           }
         }}
-        className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container' }
+        className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container'}
       >
         <div className='result-hashtag'>#</div>
         <p className='channel-search__result-text'>{channel.data.name}</p>
@@ -43,11 +43,11 @@ const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer
     <div
       onClick={async () => {
         channelByUser({ client, setActiveChannel, channel, setChannel })
-        if(setToggleContainer) {
-            setToggleContainer((prevState) => !prevState)   
+        if (setToggleContainer) {
+          setToggleContainer((prevState) => !prevState)
         }
       }}
-      className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container' }
+      className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container'}
     >
       <div className='channel-search__result-user'>
         <Avatar image={channel.image || undefined} name={channel.name} size={24} />

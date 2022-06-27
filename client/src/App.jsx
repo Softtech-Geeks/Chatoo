@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
+import axios from "axios";
 
 import { ChannelListContainer, ChannelContainer, Auth } from './components';
 
@@ -15,7 +16,7 @@ const authToken = cookies.get("token");
 
 const client = StreamChat.getInstance(apiKey);
 
-if(authToken) {
+if (authToken) {
     client.connectUser({
         id: cookies.get('userId'),
         name: cookies.get('username'),
@@ -31,25 +32,33 @@ const App = () => {
     const [createType, setCreateType] = useState('');
     const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const [isProfile, setIsProfile] = useState(false);
+    const [isDashboard, setIsDashboard] = useState(false);
 
-    if(!authToken) return <Auth />
+    if (!authToken) return <Auth />
 
     return (
         <div className="app__wrapper">
             <Chat client={client} theme="team light">
-                <ChannelListContainer 
+                <ChannelListContainer
                     isCreating={isCreating}
                     setIsCreating={setIsCreating}
                     setCreateType={setCreateType}
                     setIsEditing={setIsEditing}
+                    isProfile={isProfile}
+                    isDashboard={isDashboard}
+                    setIsProfile={setIsProfile}
+                    setIsDashboard={setIsDashboard}
                 />
-                <ChannelContainer 
-                    isCreating={isCreating}
-                    setIsCreating={setIsCreating}
-                    isEditing={isEditing}
-                    setIsEditing={setIsEditing}
-                    createType={createType}
-                />
+                {!isProfile && !isDashboard &&
+                    <ChannelContainer
+                        isCreating={isCreating}
+                        setIsCreating={setIsCreating}
+                        isEditing={isEditing}
+                        setIsEditing={setIsEditing}
+                        createType={createType}
+                    />
+                }
             </Chat>
         </div>
     );
