@@ -28,5 +28,5 @@ jobs:
     - run: npm i
     - run: cd client
     - run: npm install --legacy-peer-deps
-    - run: npm run build
+    - run: npm run react-scripts build --if-present
     # run: npm test
