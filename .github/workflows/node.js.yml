@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -24,8 +24,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm i
-      - run: cd client
+      - run: npm install
       - run: npm install --legacy-peer-deps
-      - run: npm run react-scripts build --if-present
+        working-directory: ./client
+      - run: npm run build
+        working-directory: ./client
+      - env:
+          CI: false
     # run: npm test
