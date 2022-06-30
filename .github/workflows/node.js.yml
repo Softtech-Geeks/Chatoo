@@ -11,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
@@ -28,5 +28,6 @@ jobs:
     - run: npm i
     - run: cd client
     - run: npm install --legacy-peer-deps
-    - run: npm run react-scripts build --if-present
+    - run: npm run build
+    - run: move build ..
     # run: npm test
