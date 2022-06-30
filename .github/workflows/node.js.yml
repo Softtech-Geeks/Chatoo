@@ -6,12 +6,11 @@ name: Node.js CI
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   build:
-
-    runs-on: windows-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -19,15 +18,14 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm i
-    - run: cd client
-    - run: npm install --legacy-peer-deps
-    - run: npm run build
-    - run: move build ..
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm i
+      - run: cd client
+      - run: npm install --legacy-peer-deps
+      - run: npm run react-scripts build --if-present
     # run: npm test
