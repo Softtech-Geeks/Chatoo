@@ -40,7 +40,7 @@ const EditProfile = ({ setIsEdit }) => {
                     fullName: (form.fullName != '') ? form.fullName : client.user.fullName,
                     name: (form.userName != '') ? form.userName : client.user.name,
                     image: (form.avatarURL != '') ? form.avatarURL : client.user.image,
-                    phone: (form.phone != '') ? form.phone : client.user.phone
+                    phoneNumber: (form.phone != '') ? form.phone : client.user.phone
                 }
             }
         );

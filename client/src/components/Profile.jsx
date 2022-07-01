@@ -126,12 +126,19 @@ const Profile = () => {
                         <p className='capitalize-me'>{client.user.name} Profile</p>
                         <Avatar image={client.user.image} name={client.user.fullName} size={125} />
                         <p className='capitalize-me'>Full Name : {client.user.fullName}</p>
-                        <p className='capitalize-me'>Role : {client.user.role}</p>
+                        <p className='capitalize-me'>Role : {(client.user.role == "ServiceProvider") ? "Service Provider" : client.user.role}</p>
                         <p className='capitalize-me'>Phone Number : {client.user.phoneNumber}</p>
                         <p>Registered In : {client.user.created_at.slice(0, 10)}</p>
                         <p>Last Time Updated: {client.user.updated_at.slice(0, 10)}</p>
                         <p>User Status : {(client.user.banned) ? 'Banned' : "Active"}{(client.user.online) ? ' Online' : " Offline"}</p>
                         <p>Last Time Active: {client.user.last_active.slice(0, 10)}</p>
+                        {(client.user.role == "ServiceProvider") &&
+                            <><p className='capitalize-me'>Job Title : {client.user.jobTitle}</p>
+                                <p className='capitalize-me'>Field : {client.user.field}</p>
+                                <p className='capitalize-me'>Organization : {client.user.organization}</p>
+                                <p className='capitalize-me'>Experience : {client.user.experience}</p>
+                                <p className='capitalize-me'>Service Description : {client.user.serviceDesc}</p></>
+                        }
                         {/* <form onSubmit={registerToAll}> */}
                         <form onSubmit={() => setIsEdit(true)}>
                             <div className="auth__form-container_fields-content_button">
