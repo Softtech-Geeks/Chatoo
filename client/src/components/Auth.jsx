@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { PickerOverlay } from 'filestack-react';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 // image from assets folder
 import signinImage from "../assets/theme.png";
@@ -39,23 +41,32 @@ const Auth = () => {
 
 		const { userName, password, phone, avatarURL } = form;
 
-		const URL = 'https://chatoo-sg.herokuapp.com/auth';
+		const URL = 'http://localhost:5000/auth';
+		const MySwal = withReactContent(Swal)
 
-		const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-			userName, password, fullName: form.fullName, phone, avatarURL,
-		});
+		try {
+			const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+				userName, password, fullName: form.fullName, phone, avatarURL,
+			});
 
-		cookies.set('token', token);
-		cookies.set('username', userName);
-		cookies.set('fullName', fullName);
-		cookies.set('userId', userId);
+			cookies.set('token', token);
+			cookies.set('username', userName);
+			cookies.set('fullName', fullName);
+			cookies.set('userId', userId);
 
-		if (isSignup) {
-			cookies.set('phoneNumber', phone);
-			cookies.set('avatarURL', avatarURL);
-			cookies.set('hashedPassword', hashedPassword);
+			if (isSignup) {
+				cookies.set('phoneNumber', phone);
+				cookies.set('avatarURL', avatarURL);
+				cookies.set('hashedPassword', hashedPassword);
+				MySwal.fire(<p>Sign up done successfully</p>);
+			} else {
+				MySwal.fire(<p>Sign in done successfully</p>);
+			}
+
+			window.location.reload();
+		} catch (e) {
+			MySwal.fire(<p>Wrong inputs</p>);
 		}
-		window.location.reload();
 	};
 
 	// use effect to display the avatar from the url when link changed
