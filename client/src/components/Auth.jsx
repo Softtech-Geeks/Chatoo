@@ -41,7 +41,7 @@ const Auth = () => {
 
 		const { userName, password, phone, avatarURL } = form;
 
-		const URL = 'http://localhost:5000/auth';
+		const URL = 'https://chatoo-sg.herokuapp.com/auth';
 		const MySwal = withReactContent(Swal)
 
 		try {
