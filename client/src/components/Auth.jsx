@@ -42,8 +42,9 @@ const Auth = () => {
 		const { userName, password, phone, avatarURL } = form;
 
 		const URL = 'https://chatoo-sg.herokuapp.com/auth';
+		// const URL = 'http://localhost:5000/auth';
 		const MySwal = withReactContent(Swal)
-
+		if (isSignup && password !== form.confirm) return MySwal.fire(<p>Password and Confirm password should be same</p>);
 		try {
 			const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
 				userName, password, fullName: form.fullName, phone, avatarURL,

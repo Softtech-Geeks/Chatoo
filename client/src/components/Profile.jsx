@@ -147,7 +147,7 @@ const Profile = () => {
                                 <button>Edit Profile</button>
                             </div>
                         </form>
-                        {(client.user.role != 'ServiceProvider') && <form onSubmit={() => setIsProvider(true)}>
+                        {(client.user.role != 'ServiceProvider' && client.user.role != 'admin') && <form onSubmit={() => setIsProvider(true)}>
                             <div className="auth__form-container_fields-content_button">
                                 <button>Become a Provider</button>
                             </div>
